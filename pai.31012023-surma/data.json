@@ -1,0 +1,24 @@
+[
+ {
+ "Imie": "Jan",
+ "Nazwisko": "Kowalski",
+ "Miasto": "Katowice",
+ "Wiek": "19",
+ "Plec": "M",
+ "Komentarz": "Można go umieszczać tylko w ten sposób... ale też nie zawsze"
+ },
+ {
+ "Imie": "Agnieszka",
+ "Nazwisko": "Bogacka",
+ "Miasto": "Tychy",
+ "Wiek": "34",
+ "Plec": "K"
+ },
+ {
+ "Imie": "Tomasz",
+ "Nazwisko": "Nowak",
+ "Miasto": "Mysłowice",
+ "Wiek": "17",
+ "Plec": "M"
+ }
+]
