@@ -1,0 +1,66 @@
+1. co to s¹ transakcje?
+2. w³asnoœci transakcji (ACID)
+3. 3 sposoby wykonywania transakcji w SQL Server
+4. co to jest wspó³bie¿noœæ?
+5. w jakim celu dane s¹ blokowane?
+6. tryby blokad
+7. zakres blokad - (jakie?)
+8. zakleszczenia - (kiedy?)
+9. Problemy z izolowaniem transakcji
+- utrata aktualizacji,
+- brudne odczyty,
+- niepowtarzalne odczyty,
+- odczyty widma
+10. poziomy izolacji transakcji:
+- Read Uncommited,
+- Read Commited,
+- Repeatable Read,
+- Serializable
+
+Odp:
+
+1. Transakcja jest sekwencj¹ (uporz¹dkowanym zbiorem) logicznie powi¹zanych operacji na bazie danych, która przeprowadza bazê danych z jednego stanu spójnego w inny stan spójny.
+
+2. ACID - zbiór w³aœciwoœci gwarantuj¹cych poprawne przetwarzanie transakcji w bazach danych. ACID jest skrótowcem od angielskich s³ów atomicity, consistency, isolation, durability, czyli niepodzielnoœæ, spójnoœæ, izolacja, trwa³oœæ.
+
+3. Istniej¹ trzy sposoby: 
+
+ - Explicit - jawnie, rozpoczecie za pomoca polecenia
+
+ - Autocommit - automatycznie, operacje wykonywane na serwerze sa standardowo traktowane jako transakcje, w zwiazku z czym nie ma potrzeby ich rozpoczynania poleceniem BEGIN TRANSACTION, po poprawnym wykonaniu kazdez polecen jest automatycznie zatwierdzane
+
+ - Implicit - niejawne, transakcje sa wywo³ywane przez programy uzytkowe dzialajace na bazie danych
+
+4. Wspó³bie¿noœæ polega na wykonywaniu wiêcej ni¿ jednego procesu w tym samym czasie. Dziêki temu mechanizmowi wielu u¿ytkowników mo¿e w tym samym czasie korzystaæ z serwera bazodanowego.
+
+5. Blokowanie danych stsoujemy w celu zagwarantowania integraloœci i spójnosci danych w trakcie realizowania transakcji.
+
+6. Istniej¹ dwa tryby blokady:
+ 
+ - Blokady wspó³dzielone S - s¹ zak³adane na odczytywanych obiekatach tylko na czas   wykonywania zapytania.
+
+ - Blokady wy³¹czne X - s¹ zak³adane na modyfikowanych obiektach i domyœlnie utzrymywanych   do zakoñczenia ca³ej transkacji.
+
+7.  Blokady moga byc zakladane na roznym poziomie szczegolowosci - na poziomie wierszy, kluczy, indeksow, stron, tabel, zakresow lub bazy. Dla kazdej transakcji dynamicznie jest okreslany odpowiedni poziom, na ktorym nalezy zalozyc blokade. Poziomy, na ktorych zakladane sa blokady, sa ustawione i kontolowane przez srwer bazodanowy. To on sprawdza, czy blokady przydzielone na jednym poziomie repektuja blokady ustawione na innym poziomie.
+Im wieksze sa obiekty, tym dluzej nie sa one dostepne dla uzytkownika (mniejsza wspolbiznosc), ale dzieki temu zmniejsza sie liczba blokad, ktorymi musi zarzadzac serwer.
+
+8. Zakleszczenia (ang. deadlock) powstaje, gdy jeden proces probuje zalozyc blokade powodujac konflikt z blokada, ktora probuje zalozyc inny proces. W wyniku nie moga zostac zaloznoe blokady wymagane do ukonczenia rozpoczetych procesow. Serwery bazodanowe posiadaja algorytmy, ktore automatycznie wykrywaja zakleszczenia i przerywaja wykonywanie jednej z transakcji.
+
+9. 
+
+ - utraka aktualizacji - problem pojawi sie, gdy dwie transakcje modyfikuja te same dane. Zadna z trksakcji nie wie, ze ta druga transakcja korzysta z tych samych danych
+
+ - brudne odczyty - wystepuja, gdy jedna transakcja dokonuje zmian danych, a druga w tym czasie odczytuje te dane.
+
+ - niepowtarzalne odczyty - wystepuja, gdy powtorzenie w ramach transakcji tego samego odczytu daje inny wynik.
+
+10. 
+
+- Read Uncommited - tryb niezatwierdzonego odczytu, najnizszy poziom izolacji, proces nie powoduje zalozenia blokady wspoldzielonej, tylko fizycznie uszkodzone dane nie beda odczytywane 
+
+- Read Commited - tryb odczytu zatwierdzonego, jest to domyslny poziom izlacji stosowany przez MS SQL Server, podczas odczytu danych zosanie zalozona na nie blokasa wspodzielona, zalozona blokada eliminuje brudne odczyty, natomiast nadal wystepuja niepowtarzalne odczyty oraz odzyty widmo
+
+- Repeatable Read - tryb powtarzalnego odczytu, zalozona na dane blokada wspoldzielona jest utrzymywana az do calej zakonczenia transakcji, dzieki temu ze inny proces nie moze zmodyfikowac odczytywanych danych, zostaly wyelinowane niepowtarzalne odczyty, nadal wystepuje odzczyt widma
+
+
+- Serializable - tryb szeregowania, transakcje odwolujace sie do tych samych danychsa szeregowane, czyli wykonywane jedna po drugiej, jest to najwyzzsy poziom izolacji transkacji, gdzie transkakcje sa w pelni izolowane od siebie, na czas trwania transakcji ulegaja zablokowaniu cale obiekty, a nie tylko odczytywane dane, co pozwala wyeliminowac odczyty widma, ale powoduje, ze inni uzytwkownicynie moga modyfikowac przechowywanych w obiekcie danych, na przyklad odczytujac jedne wiersz tabeli, blokujemy mozliwosc modyfikowania danych calej tablei.
