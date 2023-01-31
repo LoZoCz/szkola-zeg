@@ -48,11 +48,13 @@ Im wieksze sa obiekty, tym dluzej nie sa one dostepne dla uzytkownika (mniejsza 
 
 9. 
 
- - utraka aktualizacji - problem pojawi sie, gdy dwie transakcje modyfikuja te same dane. Zadna z trksakcji nie wie, ze ta druga transakcja korzysta z tych samych danych
+ - utrata aktualizacji - problem pojawi sie, gdy dwie transakcje modyfikuja te same dane. Zadna z trksakcji nie wie, ze ta druga transakcja korzysta z tych samych danych, w efekcie transkacja, ktra zakonczy sie pozniej zmodyfikuje dane niszczac zmiany dokonaneprzez transkacje, ktora zakonczyla sie wczesniej
 
- - brudne odczyty - wystepuja, gdy jedna transakcja dokonuje zmian danych, a druga w tym czasie odczytuje te dane.
+ - brudne odczyty - wystepuja, gdy jedna transakcja dokonuje zmian danych, a druga w tym czasie odczytuje te dane,w efekcie transakcja odczytuje dane, ktore nie zostaly jeszcze zatwierdzone i moga zostac wycofane
 
- - niepowtarzalne odczyty - wystepuja, gdy powtorzenie w ramach transakcji tego samego odczytu daje inny wynik.
+ - niepowtarzalne odczyty - wystepuja, gdy powtorzenie w ramach transakcji tego samego odczytu daje inny wynik, moze to byc spowodowane tym, ze po pierwszym odczycie (a nie po zakonczeniu transkacji) zostana zdjete blokady zalozone na odzcytywane dane, niezablokowane dane moga zostac zmienione przez dzialania a powtornie ich odczytanie da inny wynik
+
+- odczyty widma - wystepuje, gdy pomiedzy odczytami tych samych danych w ramach jednej transakcji zmieni sie liczba odzcytywanych wierszy (na przykald w wynike wykonywanie w miedzy czasie instrukcji INSERT lub DELETE na tych danych)
 
 10. 
 
@@ -61,6 +63,5 @@ Im wieksze sa obiekty, tym dluzej nie sa one dostepne dla uzytkownika (mniejsza 
 - Read Commited - tryb odczytu zatwierdzonego, jest to domyslny poziom izlacji stosowany przez MS SQL Server, podczas odczytu danych zosanie zalozona na nie blokasa wspodzielona, zalozona blokada eliminuje brudne odczyty, natomiast nadal wystepuja niepowtarzalne odczyty oraz odzyty widmo
 
 - Repeatable Read - tryb powtarzalnego odczytu, zalozona na dane blokada wspoldzielona jest utrzymywana az do calej zakonczenia transakcji, dzieki temu ze inny proces nie moze zmodyfikowac odczytywanych danych, zostaly wyelinowane niepowtarzalne odczyty, nadal wystepuje odzczyt widma
-
 
 - Serializable - tryb szeregowania, transakcje odwolujace sie do tych samych danychsa szeregowane, czyli wykonywane jedna po drugiej, jest to najwyzzsy poziom izolacji transkacji, gdzie transkakcje sa w pelni izolowane od siebie, na czas trwania transakcji ulegaja zablokowaniu cale obiekty, a nie tylko odczytywane dane, co pozwala wyeliminowac odczyty widma, ale powoduje, ze inni uzytwkownicynie moga modyfikowac przechowywanych w obiekcie danych, na przyklad odczytujac jedne wiersz tabeli, blokujemy mozliwosc modyfikowania danych calej tablei.
