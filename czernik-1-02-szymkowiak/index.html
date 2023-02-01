@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAI - 1-02</title>
+    <link rel="stylesheet" href="styl_1.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Witamy w rejestacji "Wszystkie smaki"</h1>
+    </header>
+    <div class="upper-cont">
+        <div class="left__upper">
+            <img src="menu.jpg" alt="Nasze dania">
+        </div>
+        <div class="right__upper">
+            <h4>U nas dobrze zjesz!</h4>
+            <ol>
+                <li>Obiad od 40zł</li>
+                <li>Przekąski do 10zł</li>
+                <li>Kolacja do 20zł</li>
+            </ol>
+        </div>
+    </div>
+    <form action="rezerwacja.php" method="post">
+        <h3>Zarezerwuj stolik on-line</h3>
+
+        <label for="data">Data (format rrrr-mm-dd)</label><br>
+        <input type="text" id="data" name="data"><br>
+
+        <label for="ppl">Ile osób?</label><br>
+        <input type="number" id="ppl" name="ppl"><br>
+
+        <label for="phone">Twój numer telefonu</label><br>
+        <input type="text" id="phone" name="phone"><br>
+
+        <div class="agreement">
+            <input type="checkbox" name="accept" id="accept">
+            <label for="accept">Zgadzam sie na przetwarzanie moich danych osobowych</label>
+        </div>
+
+        <div class="btn-box">
+            <input type="submit" value="REZERWUJ" name="submit">
+            <input type="reset" value="WYCZYSC">
+        </div>
+    </form>
+    <footer>
+        <p>Strone opracował: MATEUSZ CZERNIK</p>
+    </footer>
+</body>
+</html>
