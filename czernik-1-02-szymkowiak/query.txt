@@ -1,0 +1,9 @@
+INSERT INTO rezerwacje VALUES(NULL, '', $data, $ppl, $phone);
+
+
+
+INSERT INTO rezerwacje VALUES(NULL, 1, '2017-07-04', 4, '111222333');
+
+INSERT INTO `rezerwacje` (id, nr_stolika, data_rez, liczba_osob, telefon) VALUES (NULL, 1, '2017-07-04', 4, '111-222-333');
+
+
