@@ -1,0 +1,66 @@
+body{
+    margin: 0;
+}
+
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+header{
+    background: darkgreen;
+    color: white;
+    padding: 5px;
+    clear: both;
+}
+
+nav{
+    background: palegreen;
+    width: 30%;
+    float: left;
+    height: 500px;
+}
+
+.cont__main-box{
+    background: honeydew;
+    width: 70%;
+    float: left;
+    height: 500px;
+    padding-top: 100px;
+}
+
+footer{
+    background: palegreen;
+    padding: 3px;
+}
+
+table, td{
+    border: 1px solid darkgreen;
+    padding: 3px;
+}
+
+table{
+    margin: auto;
+    width: 95%;
+    border-collapse: collapse;
+}
+
+td, th{
+    padding: 20px 0;
+}
+
+button{
+    background: darkgreen;
+    color: white;
+    padding: 5px;
+    transition: all ease-in-out .15s;
+}
+
+button:hover{
+    background: honeydew;
+    color: darkgreen;
+}
+
+img{
+    width: 300px;
+}
