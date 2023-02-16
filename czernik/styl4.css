@@ -1,5 +1,8 @@
 body{
     margin: 0;
+    display: grid;
+    grid-template-rows: 100px 1fr 100px;
+    height: 100vh;
 }
 
 *{
@@ -18,15 +21,17 @@ nav{
     background: palegreen;
     width: 30%;
     float: left;
-    height: 500px;
+    height: 100%;
 }
 
 .cont__main-box{
     background: honeydew;
     width: 70%;
     float: left;
-    height: 500px;
-    padding-top: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer{
